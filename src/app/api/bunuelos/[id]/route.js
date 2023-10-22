@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { dbConnect } from '@/utils/mongoose'
 import { httpErrorCase, postVerification } from '@/utils/extraFunctions'
-import BunueloSchema from '../../schemas/BunueloSchema';
+import BunueloSchema from '@/schemas/BunueloSchema';
 import { Types } from 'mongoose';
 
 dbConnect()
