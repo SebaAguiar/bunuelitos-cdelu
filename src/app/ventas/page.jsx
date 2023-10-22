@@ -8,6 +8,9 @@ const Ventas = () => {
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
   const [ventas, setVentas] = useState([])
+  const [totalGranancia, setTotalGanancia] = useState(0)
+  const [totalClassicBunuelos, setTotalClassicBunuelos] = useState(0)
+  const [totalSpecialBunuelo, setTotalSpecialBunuelo] = useState(0)
 
   useEffect(() => {
     return async () => {
@@ -17,6 +20,23 @@ const Ventas = () => {
       }
     }
   }, [ventas])
+
+  console.log(ventas)
+  // useEffect(() => {
+  //   if(!totalGranancia) {
+  //     const ganancia = 0
+  //     for (var i = 0; i < ventas.length; i++) {
+  //       ganancia += ventas[i].money;
+  //     }
+  //     setTotalGanancia(ganancia)
+  //   }
+  //   if(!totalClassicBunuelos) {
+  //     const classic = 0
+  //     for (var i = 0; i < ventas.length; i++) {
+  //       sumaTotal += arregloObjetos[i].costo;
+  //     }
+  //   } 
+  // })
   
   const handleToDateChange = (e) => {
     setToDate(e.target.value)
@@ -43,6 +63,22 @@ const Ventas = () => {
           Aplicar
         </button>
       </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Clásicos</th>
+            <th>Rellenos</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
       <table className='min-w-full'>
         <thead>
           <tr>
