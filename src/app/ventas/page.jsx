@@ -101,7 +101,7 @@ const Ventas = () => {
           <tr>
             <td className='whitespace-nowrap py-4 px-6'>{totalClassicBunuelos}</td>
             <td className='whitespace-nowrap py-4 px-6'>{totalSpecialBunuelo}</td>
-            <td className='whitespace-nowrap py-4 px-6'>{totalGranancia}</td>
+            <td className='whitespace-nowrap py-4 px-6'>$ {totalGranancia}</td>
           </tr>
         </tbody>
       </table>
@@ -125,7 +125,7 @@ const Ventas = () => {
                   <td className='whitespace-nowrap py-4 px-6'>{venta.classic}</td>
                   <td className='whitespace-nowrap py-4 px-6'>{venta.special}</td>
                   <td className='whitespace-nowrap py-4 px-6'>{venta.mercadopago ? 'Mercadopago' : 'Efectivo'}</td>
-                  <td className='whitespace-nowrap py-4 px-6'>{venta.money}</td>
+                  <td className='whitespace-nowrap py-4 px-6'>$ {venta.money}</td>
                   <td className='whitespace-nowrap py-4 px-6'>{new Date(venta.createdAt).toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric'})}</td>
               </tr>
               )
