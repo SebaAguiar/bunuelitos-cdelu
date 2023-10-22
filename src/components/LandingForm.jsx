@@ -107,7 +107,7 @@ const LandingForm = () => {
 
   return (
     <div className='w-full h-full flex justify-center'>
-      <form onSubmit={handleSubmit} className='w-5/6 h-full grid grid-cols-5 grid-rows-10'>
+      <form onSubmit={handleSubmit} className='w-5/6 h-full grid grid-cols-5 grid-rows-10 overflow-y-scroll'>
       <h1 className='grid col-start-1 col-end-6 row-start-1 text-center text-xl font-bold'>Crear Pedido</h1>
         <div className='col-start-1 col-end-6 row-start-2 row-end-4 flex flex-col items-center'>
           <h2 className='font-semibold text-lg text-center'>Clasico</h2>
