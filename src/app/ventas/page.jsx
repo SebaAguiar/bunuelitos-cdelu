@@ -36,6 +36,7 @@ const Ventas = () => {
       for (let i = 0; i < ventas.length; i++) {
         classic += ventas[i].classic;
       }
+      classic = classic / 12
       setTotalClassicBunuelos(classic)
     }
     if(!totalSpecialBunuelo) {
@@ -43,6 +44,7 @@ const Ventas = () => {
       for(let i = 0; i < ventas.length; i++) {
         special += ventas[i].special
       }
+      special = special / 12
       setTotalSpecialBunuelo(special)
     }
   }, [totalGranancia, totalClassicBunuelos, totalSpecialBunuelo, ventas])
