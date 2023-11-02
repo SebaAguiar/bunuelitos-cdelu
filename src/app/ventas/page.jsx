@@ -21,7 +21,7 @@ const Ventas = () => {
         setVentasCopy(dbVentas.data.response)
       }
     }
-  }, [ventas, ventasCopy])
+  }, [ventas.length, ventasCopy.length])
 
   useEffect(() => {
     if(!totalGranancia) {
