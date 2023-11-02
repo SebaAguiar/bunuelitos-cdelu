@@ -69,6 +69,14 @@ const Ventas = () => {
     }
   }
 
+  console.log({
+    totalGranancia, 
+    totalClassicBunuelos, 
+    totalSpecialBunuelo, 
+    ventas,
+    ventasCopy
+  })
+
   return (
     <div className='h-full w-full overflow-scroll bg-yellow-1'>
       <h1>Ventas</h1>
