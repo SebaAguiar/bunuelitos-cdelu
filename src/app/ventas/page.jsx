@@ -28,6 +28,10 @@ const Ventas = () => {
     }
   }, [ventas, ventasCopy, totalClassicBunuelos, totalGranancia, totalSpecialBunuelo])
 
+  console.log(
+    "ventas", ventas, "ventasCopy", ventasCopy, "totalClassicBunuelos", totalClassicBunuelos, "TotalSpecialBunuelos", totalSpecialBunuelo, "TotalGanancia", totalGranancia
+  )
+
   
   const handleToDateChange = (e) => {
     setToDate(e.target.value)
