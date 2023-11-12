@@ -21,15 +21,13 @@ const Ventas = () => {
         setVentas(dbVentas.data.response)
         setVentasCopy(dbVentas.data.response)
       }
+      const totalSuma = funcSuma(ventas)
+      setTotalClassicBunuelos(totalSuma.classic / 12)
+      setTotalSpecialBunuelo(totalSuma.special / 12)
+      setTotalGanancia(totalSuma.money)
     }
-  }, [ventas.length, ventasCopy.length])
+  }, [ventas, ventasCopy, totalClassicBunuelos, totalGranancia, totalSpecialBunuelo])
 
-  useEffect(() => {
-    const totalSuma = funcSuma(ventas)
-    setTotalClassicBunuelos(totalSuma.classic / 12)
-    setTotalSpecialBunuelo(totalSuma.special / 12)
-    setTotalGanancia(totalSuma.money)
-  }, [totalClassicBunuelos, totalGranancia, totalSpecialBunuelo, ventas])
   
   const handleToDateChange = (e) => {
     setToDate(e.target.value)
