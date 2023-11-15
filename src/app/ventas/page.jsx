@@ -1,5 +1,6 @@
 'use client'
-import { funcSuma } from '@/utils/extraFunctions';
+import { useExistentContext } from '@/context/AppContext';
+import { funcSuma, getVentas } from '@/utils/extraFunctions';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
@@ -8,24 +9,27 @@ const Ventas = () => {
   const [today, setToday] = useState(true)
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
-  const [ventas, setVentas] = useState([])
   const [ventasCopy, setVentasCopy] = useState([])
   const [totalGranancia, setTotalGanancia] = useState(0)
   const [totalClassicBunuelos, setTotalClassicBunuelos] = useState(0)
   const [totalSpecialBunuelo, setTotalSpecialBunuelo] = useState(0)
+  const { ventas, setVentas } = useExistentContext()
 
   useEffect(() => {
-    return async () => {
-      if(!ventas.length && !ventasCopy.length) {
-        const dbVentas = await axios.get('/api/ventas')
-        setVentas(dbVentas.data.response)
-        setVentasCopy(dbVentas.data.response)
+    return async() => {
+      if(ventas.length === 0) {
+        const ventasTotal = await getVentas()
+        setVentas(ventasTotal)
       }
+    }
+  })
+
+
+  useEffect(() => {
       const totalSuma = funcSuma(ventas)
       setTotalClassicBunuelos(totalSuma.classic / 12)
       setTotalSpecialBunuelo(totalSuma.special / 12)
       setTotalGanancia(totalSuma.money)
-    }
   }, [ventas, ventasCopy, totalClassicBunuelos, totalGranancia, totalSpecialBunuelo])
 
   console.log(
@@ -36,6 +40,31 @@ const Ventas = () => {
   const handleToDateChange = (e) => {
     setToDate(e.target.value)
     console.log(toDate)
+  }
+
+  const handleFromDateChange = (e) => {
+    setFromDate(e.target.value)
+    console.log(fromDate)
+  }
+
+  const handleFilterButton = (e) => {
+    e.preventDefault()
+    const newToDate = new Date(toDate)
+    const newFromDate = new Date(fromDate)
+    console.log(newToDate);
+    let filtered = ventas.filter(bun => {
+      const date = new Date(bun.createdAt)
+      return (
+        date.getDate() === fechaHoy.getDate() &&
+        date.getMonth() === fechaHoy.getMonth() &&
+        date.getFullYear() === fechaHoy.getFullYear()
+      )
+    })
+    const valuesToChange = funcSuma(filtered)
+    setVentas(filtered)
+    setTotalGanancia(valuesToChange.money)
+    setTotalClassicBunuelos(valuesToChange.classic / 12)
+    setTotalSpecialBunuelo(valuesToChange.special / 12)
   }
 
   const handleToDayChange = (e) => {
@@ -73,14 +102,14 @@ const Ventas = () => {
           <label>Hoy</label>
         </div>
         <div className='flex flex-col-reverse items-center'>
-          <input type="date" />
+          <input type="date" value={fromDate} onChange={handleFromDateChange} />
           <label>Desde</label>
         </div>
         <div className='flex flex-col-reverse items-center'>
           <input type="date" value={toDate} onChange={handleToDateChange} />
           <label>hasta</label>
         </div>
-        <button>
+        <button onClick={handleFilterButton}>
           Aplicar
         </button>
       </div>
@@ -89,13 +118,15 @@ const Ventas = () => {
           <tr>
             <th>Clásicos</th>
             <th>Rellenos</th>
-            <th>Total</th>
+            <th>Buñuelos Totales</th>
+            <th>Total Ganancia</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td className='whitespace-nowrap py-4 px-6'>{totalClassicBunuelos}</td>
             <td className='whitespace-nowrap py-4 px-6'>{totalSpecialBunuelo}</td>
+            <td className='whitespace-nowrap py-4 px-6'>{totalSpecialBunuelo + totalClassicBunuelos}</td>
             <td className='whitespace-nowrap py-4 px-6'>$ {totalGranancia}</td>
           </tr>
         </tbody>

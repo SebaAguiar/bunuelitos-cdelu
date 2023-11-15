@@ -18,6 +18,11 @@ export const bunuelosToContext = async () => {
   return bun.data.response
 }
 
+export const getVentas = async () => {
+  const ventas = await axios.get('/api/ventas')
+  return ventas.data.response
+}
+
 export const funcSuma = (buns) => {
   let totalGanancia = buns.reduce((acc, bun) => acc + bun.money, 0)
   let totalRellenos = buns.reduce((acc, bun) => acc + bun.special, 0)

@@ -18,6 +18,7 @@ const ContextProvider = ({ children }) => {
 
   const [bunuelos, setBunuelos] = useState([])
   const [venta, setVenta] = useState({})
+  const [ventas, setVentas] = useState([])
 
   const changeCost = (num) => {
     setTotalCost(num)
@@ -35,7 +36,9 @@ const ContextProvider = ({ children }) => {
         bunuelos,
         setBunuelosState,
         venta,
-        setVenta
+        setVenta,
+        ventas,
+        setVentas
       }}
     >
       {children}
