@@ -17,7 +17,7 @@ const Ventas = () => {
 
   useEffect(() => {
     return async() => {
-      while(ventas.length === 0) {
+      if(!ventas.length) {
         const ventasTotal = await getVentas()
         setVentasState(ventasTotal)
       }
