@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 const VentaRealizada = () => {
   const router = useRouter()
   const { venta } = useExistentContext()
-  console.log(venta);
   return (
     <div className='h-full w-full grid grid-cols-4 grid-rows-10 bg-yellow-2'>
       <h1 className='row-start-1 col-start-2 col-end-4 text-center text-xl font-bold mt-3'>Venta Realizada</h1>

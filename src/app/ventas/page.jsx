@@ -13,13 +13,13 @@ const Ventas = () => {
   const [totalGranancia, setTotalGanancia] = useState(0)
   const [totalClassicBunuelos, setTotalClassicBunuelos] = useState(0)
   const [totalSpecialBunuelo, setTotalSpecialBunuelo] = useState(0)
-  const { ventas, setVentas } = useExistentContext()
+  const { ventas, setVentasState } = useExistentContext()
 
   useEffect(() => {
     return async() => {
-      if(ventas.length === 0) {
+      if(!ventas.length) {
         const ventasTotal = await getVentas()
-        setVentas(ventasTotal)
+        setVentasState(ventasTotal)
       }
     }
   })
@@ -61,7 +61,7 @@ const Ventas = () => {
       )
     })
     const valuesToChange = funcSuma(filtered)
-    setVentas(filtered)
+    setVentasState(filtered)
     setTotalGanancia(valuesToChange.money)
     setTotalClassicBunuelos(valuesToChange.classic / 12)
     setTotalSpecialBunuelo(valuesToChange.special / 12)
@@ -74,7 +74,7 @@ const Ventas = () => {
       setTotalGanancia(valuesToChange.money)
       setTotalClassicBunuelos(valuesToChange.classic / 12)
       setTotalSpecialBunuelo(valuesToChange.special / 12)
-      setVentas(ventasCopy)
+      setVentasState(ventasCopy)
     } else {
       let fechaHoy = new Date()
       let filtered = ventas.filter(bun => {
@@ -86,7 +86,7 @@ const Ventas = () => {
         )
       })
       const valuesToChange = funcSuma(filtered)
-      setVentas(filtered)
+      setVentasState(filtered)
       setTotalGanancia(valuesToChange.money)
       setTotalClassicBunuelos(valuesToChange.classic / 12)
       setTotalSpecialBunuelo(valuesToChange.special / 12)

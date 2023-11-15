@@ -30,6 +30,12 @@ const ContextProvider = ({ children }) => {
     }
   }
 
+  const setVentasState = (ventasTotal) => {
+    if(!ventas.length) {
+      setVentas(ventasTotal)
+    }
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -38,7 +44,7 @@ const ContextProvider = ({ children }) => {
         venta,
         setVenta,
         ventas,
-        setVentas
+        setVentasState
       }}
     >
       {children}
