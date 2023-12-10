@@ -25,15 +25,11 @@ const ContextProvider = ({ children }) => {
   }
 
   const setBunuelosState = (bun) => {
-    if(!bunuelos.length) {
       setBunuelos(bun)
-    }
   }
 
   const setVentasState = (ventasTotal) => {
-    if(!ventas.length) {
       setVentas(ventasTotal)
-    }
   }
 
   return (

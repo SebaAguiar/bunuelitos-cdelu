@@ -30,11 +30,8 @@ const Ventas = () => {
       setTotalClassicBunuelos(totalSuma.classic / 12)
       setTotalSpecialBunuelo(totalSuma.special / 12)
       setTotalGanancia(totalSuma.money)
+      setVentasCopy(ventas)
   }, [ventas, ventasCopy, totalClassicBunuelos, totalGranancia, totalSpecialBunuelo])
-
-  console.log(
-    "ventas", ventas, "ventasCopy", ventasCopy, "totalClassicBunuelos", totalClassicBunuelos, "TotalSpecialBunuelos", totalSpecialBunuelo, "TotalGanancia", totalGranancia
-  )
 
   
   const handleToDateChange = (e) => {
@@ -53,29 +50,30 @@ const Ventas = () => {
     const newFromDate = new Date(fromDate)
     console.log(newToDate);
     let filtered = ventas.filter(bun => {
-      const date = new Date(bun.createdAt)
       return (
-        date.getDate() === fechaHoy.getDate() &&
-        date.getMonth() === fechaHoy.getMonth() &&
-        date.getFullYear() === fechaHoy.getFullYear()
+        bun.createdAt >= newFromDate && bun.createdAt <= newToDate
       )
     })
+    console.log(filtered)
     const valuesToChange = funcSuma(filtered)
     setVentasState(filtered)
-    setTotalGanancia(valuesToChange.money)
     setTotalClassicBunuelos(valuesToChange.classic / 12)
     setTotalSpecialBunuelo(valuesToChange.special / 12)
   }
 
   const handleToDayChange = (e) => {
-    setToday(!today)
+    console.log(today)
     if(!today) {
+      console.log(ventasCopy.length)
       let valuesToChange = funcSuma(ventasCopy)
       setTotalGanancia(valuesToChange.money)
       setTotalClassicBunuelos(valuesToChange.classic / 12)
       setTotalSpecialBunuelo(valuesToChange.special / 12)
       setVentasState(ventasCopy)
+      console.log(ventas)
+      setToday(!today)
     } else {
+      console.log('else')
       let fechaHoy = new Date()
       let filtered = ventas.filter(bun => {
         const date = new Date(bun.createdAt)
@@ -86,10 +84,13 @@ const Ventas = () => {
         )
       })
       const valuesToChange = funcSuma(filtered)
+      console.log(filtered.length)
       setVentasState(filtered)
+      console.log(ventas)
       setTotalGanancia(valuesToChange.money)
       setTotalClassicBunuelos(valuesToChange.classic / 12)
       setTotalSpecialBunuelo(valuesToChange.special / 12)
+      setToday(!today)
     }
   }
 
